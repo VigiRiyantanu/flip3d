@@ -2,7 +2,10 @@
 name = "flip3d"
 version = "1.7.1"
 edition = "2021"
-authors = ["Vigi Riyantanu"]
+authors = [
+    "Vigi Riyantanu <VigiRiyantanu@users.noreply.github.com>",
+    "jundaee <jundaee@users.noreply.github.com>",
+]
 license = "MIT"
 description = "Fluid, Windows Vista-style Flip 3D window switcher for Windows 10 & 11"
 

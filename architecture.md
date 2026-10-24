@@ -186,3 +186,21 @@ powershell -ExecutionPolicy Bypass -File .\build-release.ps1 [-Target <triple>] 
 - **Inno Setup 6 Packaging**: Compiles the modern installer with RestartManager, silent WebView2 deployment, and uninstaller configuration retention.
 - **Checksums**: Automatically outputs GNU `sha256sum`-compatible `dist/SHA256SUMS.txt`.
 
+---
+
+## 6. Engineering Team & Module Ownership
+
+| Subsystem / Module | Lead Engineer | Area of Ownership & Jobdesk |
+| :--- | :--- | :--- |
+| **DirectX 11 Graphics & Shaders** (`crates/engine/src/gfx.rs`, `render.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Direct3D 11 device/swapchain creation, Direct2D/DirectWrite overlays, GPU texture staging. |
+| **3D Geometry & Layout Engine** (`crates/engine/src/geometry.rs`, `layout.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | 3D projective math, camera perspective transforms, spring interpolation across 24 switcher styles. |
+| **Win32 Input Hooks & State Machine** (`crates/engine/src/hooks.rs`, `switcher.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Low-level `WH_KEYBOARD_LL`/`WH_MOUSE_LL` hooks, non-intrusive shortcut interception, dummy key events. |
+| **Window Capture Pipeline** (`crates/engine/src/capture.rs`, `windows_list.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Windows Graphics Capture & DWM thumbnail interop, virtual desktop coordinate normalization. |
+| **WebView2 Host Runtime & Vibrancy** (`crates/settings-ui/src/webview_runtime.rs`, `window_fx.rs`) | **jundaee** ([@jundaee](https://github.com/jundaee)) | Tao native windowing host, OS Acrylic and Mica blur effects (`window-vibrancy`), isolated subprocess lifecycle. |
+| **Embedded Protocol & Security Sandbox** (`crates/settings-ui/src/protocol.rs`) | **jundaee** ([@jundaee](https://github.com/jundaee)) | Zero-external-network `app://` custom protocol handler, embedded binary asset streaming, CSP isolation. |
+| **Settings Dashboard UI & State Store** (`crates/settings-ui/ui/`, `ipc.rs`) | **jundaee** ([@jundaee](https://github.com/jundaee)) | Translucent Ivory & Emerald UI components, reactive state store, bidirectional JSON-RPC IPC bridge. |
+| **System Tray & Lifecycle Management** (`crates/engine/src/app/tray.rs`, `autostart.rs`, `elevation.rs`) | **jundaee** ([@jundaee](https://github.com/jundaee)) | Multi-resolution tray icon handling, UAC elevation restart, Task Scheduler / Registry autostart. |
+| **Shared Core Configuration & IPC Primitives** (`crates/settings-core/`) | **Vigi Riyantanu & jundaee** | Config schema, 24-style catalog, atomic persistence, named event signaling. |
+| **Packaging & CI/CD Release Pipeline** (`installer/`, `build-release.ps1`) | **jundaee & Vigi Riyantanu** | Inno Setup 6 compilation, portable ZIP bundling, clippy/test quality gates. |
+
+

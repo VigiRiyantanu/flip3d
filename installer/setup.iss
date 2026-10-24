@@ -1,13 +1,13 @@
 ; Inno Setup Script for Flip 3D (Vista Style)
-; Original Windhawk mod by caliberda, ported to standalone Rust by Vigi Riyantanu
+; Original Windhawk mod by caliberda, ported to standalone Rust by Vigi Riyantanu & jundaee
 
 #ifndef MyAppVersion
 #define MyAppVersion "1.7.1"
 #endif
 
 #define MyAppName "Flip 3D"
-#define MyAppPublisher "Vigi Riyantanu"
-#define MyAppURL "https://github.com/cesarkali/alt-tab-flip-3d-fork"
+#define MyAppPublisher "Vigi Riyantanu & jundaee"
+#define MyAppURL "https://github.com/VigiRiyantanu/flip3d"
 #define MyAppExeName "flip3d.exe"
 #define MySettingsExeName "settings-ui.exe"
 

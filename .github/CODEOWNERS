@@ -1,0 +1,45 @@
+# Flip 3D Code Ownership & Team Responsibilities
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default global ownership across the entire repository
+* @VigiRiyantanu @jundaee
+
+# ----------------------------------------------------------------------
+# 1. Core Engine & Low-Level Graphics
+# Lead: @VigiRiyantanu (Lead Systems Architect & Core Graphics Engineer)
+# ----------------------------------------------------------------------
+/crates/engine/src/gfx.rs @VigiRiyantanu
+/crates/engine/src/geometry.rs @VigiRiyantanu
+/crates/engine/src/layout.rs @VigiRiyantanu
+/crates/engine/src/render.rs @VigiRiyantanu
+/crates/engine/src/capture.rs @VigiRiyantanu
+/crates/engine/src/hooks.rs @VigiRiyantanu
+/crates/engine/src/switcher.rs @VigiRiyantanu
+/crates/engine/src/windows_list.rs @VigiRiyantanu
+/crates/engine/src/icons.rs @VigiRiyantanu
+/crates/engine/src/shortcuts.rs @VigiRiyantanu
+/crates/engine/tests/ @VigiRiyantanu
+
+# ----------------------------------------------------------------------
+# 2. UI / UX, WebView2 Runtime & Packaging
+# Lead: @jundaee (UI/UX Architect & Desktop Systems Engineer)
+# ----------------------------------------------------------------------
+/crates/settings-ui/ @jundaee
+/crates/settings-ui/src/webview_runtime.rs @jundaee
+/crates/settings-ui/src/window_fx.rs @jundaee
+/crates/settings-ui/src/protocol.rs @jundaee
+/crates/settings-ui/src/ipc.rs @jundaee
+/crates/settings-ui/ui/ @jundaee
+/crates/engine/src/app/tray.rs @jundaee
+/crates/engine/src/app/autostart.rs @jundaee
+/crates/engine/src/app/elevation.rs @jundaee
+/crates/engine/src/app/settings_ui.rs @jundaee
+/installer/ @jundaee
+/build-release.ps1 @jundaee @VigiRiyantanu
+
+# ----------------------------------------------------------------------
+# 3. Shared Core Configuration & Protocols (Joint Ownership)
+# ----------------------------------------------------------------------
+/crates/settings-core/ @VigiRiyantanu @jundaee
+/architecture.md @VigiRiyantanu @jundaee
+/README.md @VigiRiyantanu @jundaee
