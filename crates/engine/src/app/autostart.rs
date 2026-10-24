@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;

@@ -2,7 +2,7 @@
 name = "flip3d"
 version = "1.7.1"
 edition = "2021"
-authors = ["caliberda (original mod)", "Antigravity (Rust port)"]
+authors = ["Vigi Riyantanu"]
 license = "MIT"
 description = "Fluid, Windows Vista-style Flip 3D window switcher for Windows 10 & 11"
 

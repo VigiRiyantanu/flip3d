@@ -1,7 +1,7 @@
 #![windows_subsystem = "windows"]
 
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();

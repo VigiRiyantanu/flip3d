@@ -2,7 +2,7 @@
 name = "settings-ui"
 version = "1.7.1"
 edition = "2021"
-authors = ["caliberda (original mod)", "Antigravity (Rust port)"]
+authors = ["Vigi Riyantanu"]
 license = "MIT"
 description = "Glass-style WebView2 Settings Panel for Flip 3D"
 

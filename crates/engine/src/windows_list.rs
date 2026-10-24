@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 use windows::core::{GUID, PCWSTR};
 use windows::Win32::Foundation::{CloseHandle, ERROR_SUCCESS, HWND, LPARAM, RECT};

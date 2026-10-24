@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 use std::sync::Arc;
 use tao::dpi::LogicalSize;

@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 // Unit tests for Geometry and Layout matching C++ formulas bit-for-bit
 
 use flip3d::geometry::D2D_POINT_2F;

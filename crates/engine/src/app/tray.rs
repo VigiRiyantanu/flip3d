@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 use std::sync::atomic::Ordering;
 use windows::core::{Result, PCWSTR};
@@ -308,7 +308,7 @@ impl TrayIcon {
                     let msg_w: Vec<u16> = concat!(
                         "Alt+Tab Flip 3D (Vista Style) - Standalone Rust Port v1.7.1\n\n",
                         "Original Windhawk mod by caliberda (https://github.com/cesarkali)\n",
-                        "Ported to standalone portable Rust by Antigravity.\n\n",
+                        "Ported to standalone portable Rust by Vigi Riyantanu.\n\n",
                         "Licensed under the MIT License.\n",
                         "Supports Windows 10 (1903+) and Windows 11."
                     )

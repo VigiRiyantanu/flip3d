@@ -1,5 +1,5 @@
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 use windows::Win32::Foundation::RECT;
 use windows::Win32::Graphics::Direct2D::Common::D2D_RECT_F;

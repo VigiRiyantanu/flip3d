@@ -1,7 +1,7 @@
 #![windows_subsystem = "windows"]
 
 // Original Windhawk mod by caliberda
-// Ported to standalone Rust by Antigravity
+// Ported to standalone Rust by Vigi Riyantanu
 
 use std::sync::atomic::Ordering;
 use windows::core::PCWSTR;

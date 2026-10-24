@@ -2,7 +2,7 @@
 name = "settings-core"
 version = "1.7.1"
 edition = "2021"
-authors = ["caliberda (original mod)", "Antigravity (Rust port)"]
+authors = ["Vigi Riyantanu"]
 license = "MIT"
 description = "Shared settings model, validation, persistence, and signaling for Flip 3D"
 
