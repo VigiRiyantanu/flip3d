@@ -1,4 +1,4 @@
-# Rust build & distribution artifacts
+# Rust build artifacts
 /target
 /dist
 Cargo.lock.backup
@@ -15,10 +15,3 @@ Thumbs.db
 .idea/
 *.sublime-project
 *.sublime-workspace
-
-# Local workspace scratch & assistant cache
-.gemini/
-.antigravity/
-.cursor/
-.claude/
-.copilot/
