@@ -1,0 +1,18 @@
+[package]
+name = "settings-core"
+version = "1.7.1"
+edition = "2021"
+authors = ["caliberda (original mod)", "Antigravity (Rust port)"]
+license = "MIT"
+description = "Shared settings model, validation, persistence, and signaling for Flip 3D"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+log = { version = "0.4", features = ["std"] }
+windows = { version = "0.62.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Threading",
+] }
