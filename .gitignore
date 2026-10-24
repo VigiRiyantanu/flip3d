@@ -1,10 +1,24 @@
+# Rust build & distribution artifacts
 /target
 /dist
+Cargo.lock.backup
+
+# Windows & OS metadata
 .DS_Store
 Thumbs.db
 *.tmp
 *.log
 *.res
+
+# IDE & Editor metadata
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
+# Local workspace scratch & assistant cache
+.gemini/
+.antigravity/
+.cursor/
+.claude/
+.copilot/

@@ -1,4 +1,4 @@
-/* Flip 3D Settings Design Tokens (code.html ivory/green palette + DESIGN.md typography & radii) */
+/* Flip 3D Settings Design Tokens (Ivory & Emerald palette) */
 
 :root {
   /* Colors */
@@ -27,7 +27,7 @@
   --muted-text: #76887e;
   --border-subtle: rgba(0, 0, 0, 0.06);
 
-  /* Radii scale from DESIGN.md */
+  /* Radii scale */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;

@@ -17,7 +17,7 @@
   src: url('../assets/fonts/jetbrainsmono.woff2') format('woff2');
 }
 
-/* Tokens from UI/code.html */
+/* Design Tokens */
 :root {
   --accent: #15803d;
   --accent-glow: rgba(22, 163, 74, 0.22);
@@ -93,7 +93,7 @@ html, body {
   box-shadow: 0 0 0 1.5px #16a34a, 0 8px 20px rgba(22, 163, 74, 0.16) !important;
 }
 
-/* Range slider custom styling from code.html */
+/* Range slider custom styling */
 input[type=range] {
   -webkit-appearance: none;
   background: transparent;

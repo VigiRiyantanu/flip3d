@@ -108,7 +108,7 @@ flowchart TD
     subgraph UIProc ["Settings UI Process (flip3d.exe --settings)"]
         U1[Tao Window + Acrylic / Mica Blur]
         U2[Wry WebView2 + app:// Custom Protocol]
-        U3[Google Stitch Ivory/Green UI & State Store]
+        U3[Ivory/Emerald Glass UI & State Store]
     end
 
     subgraph CoreCrate ["Shared Core (crates/settings-core)"]

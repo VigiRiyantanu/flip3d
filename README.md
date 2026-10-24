@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="UI/logo.png" alt="Flip 3D Logo" width="100" style="border-radius: 20px;">
+  <img src="assets/logo.png" alt="Flip 3D Logo" width="100" style="border-radius: 20px;">
 </p>
 
 <h1 align="center">Flip 3D</h1>
@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="UI/screen.png" alt="Flip 3D Settings Interface" width="780" style="border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,0.12);">
+  <img src="assets/screen.png" alt="Flip 3D Settings Interface" width="780" style="border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,0.12);">
 </p>
 
 ---
