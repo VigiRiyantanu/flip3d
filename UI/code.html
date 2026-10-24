@@ -1,0 +1,625 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<title>Flip 3D - Mod-Menu Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #15803d;
+    --accent-glow: rgba(22, 163, 74, 0.22);
+    --window-bg: rgba(250, 249, 245, 0.92);
+    --card-bg: rgba(255, 255, 255, 0.78);
+    --card-border: rgba(205, 216, 206, 0.75);
+    --card-hover: rgba(255, 255, 255, 0.96);
+    --forest-text: #1a2e22;
+    --sage-text: #52635a;
+    --muted-text: #76887e;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Custom scrollbar for ivory theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(140, 160, 146, 0.3);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 128, 108, 0.5);
+  }
+
+  .window-glass {
+    background: var(--window-bg);
+    backdrop-filter: blur(28px) saturate(130%);
+    -webkit-backdrop-filter: blur(28px) saturate(130%);
+    border: 1px solid rgba(220, 228, 221, 0.95);
+    box-shadow: 0 25px 50px -12px rgba(24, 45, 33, 0.16),
+                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  }
+
+  .card-glass {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.18s ease;
+  }
+
+  .card-glass:hover {
+    background: var(--card-hover);
+    border-color: rgba(154, 182, 160, 0.9);
+    box-shadow: 0 4px 14px rgba(26, 46, 34, 0.05);
+  }
+
+  .card-glass.selected {
+    border-color: #16a34a;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 0 0 1.5px #16a34a, 0 8px 20px rgba(22, 163, 74, 0.16);
+  }
+
+  /* Range slider custom styling */
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #d4ded6;
+    border-radius: 2px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #15803d;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+    box-shadow: 0 2px 6px rgba(21, 128, 61, 0.35);
+    border: 2px solid #ffffff;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(21, 128, 61, 0.45);
+  }
+
+  .tab-btn.active {
+    background: #e3ede6;
+    color: #134e35;
+    border-left: 3px solid #15803d;
+    font-weight: 600;
+  }
+  .tab-btn.active svg {
+    color: #15803d;
+  }
+</style>
+</head>
+<body class="min-h-screen bg-[#f7f6f0] flex items-center justify-center p-4 overflow-hidden relative">
+<!-- Desktop Wallpaper Backdrop (Bone White with Organic Sage and Mint Blurs) -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute -top-[25%] -left-[15%] w-[850px] h-[850px] rounded-full bg-[#dce9df]/75 blur-[120px]"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[900px] h-[900px] rounded-full bg-[#e2ede6]/80 blur-[130px]"></div>
+<div class="absolute top-[35%] left-[32%] w-[650px] h-[650px] rounded-full bg-[#e7efe8]/60 blur-[110px]"></div>
+<div class="absolute top-[10%] right-[22%] w-[420px] h-[420px] rounded-full bg-[#d2e4d7]/50 blur-[90px]"></div>
+<!-- Subtle ivory surface wash -->
+<div class="absolute inset-0 bg-[#f4f3ee]/40 backdrop-blur-[1px]"></div>
+</div>
+<!-- Main 900 x 620 Desktop Window -->
+<div class="relative z-10 w-[900px] h-[620px] rounded-[20px] window-glass flex flex-col overflow-hidden text-[13px] text-[#1a2e22]">
+<!-- 1. Title Bar (Height: 48px) -->
+<div class="h-12 flex-shrink-0 px-4 flex items-center justify-between border-b border-black/[0.06] select-none cursor-move bg-white/40">
+<!-- Left: Logo + App Name + Version -->
+<div class="flex items-center space-x-3">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAnVOEI3AtJ26HEyYo6mkSwaMwgA7VhO53AdEACoRHDC2AhzgsWQPhRg-0Lj35cFP4zT0x17AtmIsTtJMGPhsTImvsW14m4uS1zLE9BQl-1Nus3H0WdJ2ZNjB4hai26vclXPahIch_hHtq797-T5JQd6HTP1hsrNil0IeEysilau5iGUgPIuAC_ju0pQ-cFFTAZx6zegF5OWSd9ga3gMbxqIzcSWNnmE7mOnlTUyLKNy2yOoj7AjG9enxcgb8lP3kA" alt="Logo" class="w-7 h-7 rounded-lg object-cover border border-[#bcd3c3] shadow-sm">
+<div class="flex items-center space-x-2">
+<span class="font-bold tracking-wider text-[14px] text-[#1a2e22]">FLIP 3D</span>
+<span class="px-2 py-0.5 text-[10px] font-semibold tracking-wide rounded-full bg-[#f4f7f4] text-[#1e5436] border border-[#c6d7cb] mono">v1.7.1</span>
+</div>
+</div>
+<!-- Center: Status Pill -->
+<div class="flex items-center space-x-2 px-3 py-1 rounded-full bg-[#eaf4ed] border border-[#c3dcce] shadow-xs" id="statusPill">
+<span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]" id="statusDot"></span>
+<span class="text-[12px] font-semibold text-[#134e35]" id="statusText">Active</span>
+</div>
+<!-- Right: Window Controls -->
+<div class="flex items-center space-x-2">
+<!-- Minimize -->
+<button class="w-7 h-7 rounded-full bg-white/70 hover:bg-[#e7eee9] active:scale-95 border border-[#d2dbd3] flex items-center justify-center transition-all text-[#465b4f] hover:text-[#1a2e22] shadow-xs" title="Minimize">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5" viewBox="0 0 24 24">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+</button>
+<!-- Close -->
+<button class="w-7 h-7 rounded-full bg-white/70 hover:bg-[#fee2e2] active:scale-95 border border-[#d2dbd3] hover:border-red-300 flex items-center justify-center transition-all text-[#465b4f] hover:text-red-700 shadow-xs" title="Close">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5" viewBox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</div>
+</div>
+<!-- Body Area (Sidebar + Dynamic Content) -->
+<div class="flex flex-1 min-h-0 overflow-hidden">
+<!-- 2. Left Sidebar (Width: 200px) -->
+<div class="w-[200px] flex-shrink-0 border-r border-black/[0.06] p-3 flex flex-col space-y-1 bg-[#f5f6f1]/80 overflow-y-auto">
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:bg-[#eaf0ec]" data-tab="style" onclick="switchTab('style')">
+<svg class="w-4 h-4 text-[#15803d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+<span class="text-[13px]">Style</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="shortcuts" onclick="switchTab('shortcuts')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="12" rx="2" width="18" x="3" y="6"></rect><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h.01M11 14h2M17 14h.01"></path></svg>
+<span class="text-[13px] font-medium">Shortcuts</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="animation" onclick="switchTab('animation')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+<span class="text-[13px] font-medium">Animation</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1] active" data-tab="windows" onclick="switchTab('windows')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="3"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line></svg>
+<span class="text-[13px] font-medium">Windows</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="background" onclick="switchTab('background')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 14.14 14.14"></path></svg>
+<span class="text-[13px] font-medium">Background</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="display" onclick="switchTab('display')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="5"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+<span class="text-[13px] font-medium">Display</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="performance" onclick="switchTab('performance')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+<span class="text-[13px] font-medium">Performance</span>
+</button>
+<button class="tab-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-left transition-all text-[#52635a] hover:text-[#1a2e22] hover:bg-[#f0f4f1]" data-tab="system" onclick="switchTab('system')">
+<svg class="w-4 h-4 text-[#73887b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+<span class="text-[13px] font-medium">System &amp; About</span>
+</button>
+</div>
+<!-- 3. Content Area (Right Scrollable Pane) -->
+<div class="flex-1 min-h-0 overflow-y-auto p-5 space-y-5 bg-[#faf9f5]" id="contentPane">
+<!-- ==================== TAB 1: STYLE ==================== -->
+<div class="tab-content space-y-5 hidden" id="tab-style">
+<!-- Top Setting: Win+Tab animation style dropdown -->
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Win+Tab animation style</div>
+<div class="text-[12px] text-[#63766a]">Choose the presentation used when triggering Win+Tab</div>
+</div>
+<div class="relative w-64">
+<button class="w-full h-9 px-3 rounded-lg bg-white/90 hover:bg-white border border-[#cdd8ce] flex items-center justify-between text-left text-[13px] text-[#1a2e22] shadow-xs" onclick="toggleDropdown('winTabDropdown')">
+<span class="font-medium" id="selectedWinTab">Same as Alt+Tab</span>
+<svg class="w-4 h-4 text-[#607468]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="hidden absolute top-10 right-0 w-full z-50 rounded-xl bg-white border border-[#c4d3c6] shadow-xl py-1 max-h-60 overflow-y-auto" id="winTabDropdown">
+<div class="px-3 py-1.5 hover:bg-[#eaf2ec] text-[#134e35] font-semibold cursor-pointer" onclick="selectWinTab('Same as Alt+Tab')">Same as Alt+Tab</div>
+<div class="px-3 py-1.5 hover:bg-[#f2f7f3] text-[#22362a] cursor-pointer" onclick="selectWinTab('Flip 3D (Vista stack)')">Flip 3D (Vista stack)</div>
+<div class="px-3 py-1.5 hover:bg-[#f2f7f3] text-[#22362a] cursor-pointer" onclick="selectWinTab('Cascade')">Cascade</div>
+<div class="px-3 py-1.5 hover:bg-[#f2f7f3] text-[#22362a] cursor-pointer" onclick="selectWinTab('Cover Flow')">Cover Flow</div>
+<div class="px-3 py-1.5 hover:bg-[#f2f7f3] text-[#22362a] cursor-pointer" onclick="selectWinTab('Grid (Mission Control)')">Grid (Mission Control)</div>
+<div class="px-3 py-1.5 hover:bg-[#f2f7f3] text-[#22362a] cursor-pointer" onclick="selectWinTab('Carousel')">Carousel</div>
+</div>
+</div>
+</div>
+<!-- Section: 3D Styles -->
+<div>
+<div class="flex items-center space-x-2 mb-3">
+<span class="text-[11px] font-bold uppercase tracking-wider text-[#144f33] bg-[#e3ece5] px-2.5 py-0.5 rounded-full border border-[#c6d7cb] shadow-2xs">3D STYLES</span>
+<div class="h-px flex-1 bg-black/[0.06]"></div>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- Flip 3D (Selected) -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group relative" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#e7eee8] border border-[#bcd3c1] mb-2 flex items-center justify-center relative overflow-hidden group-hover:border-[#16a34a]/60">
+<div class="w-14 h-10 rounded border border-[#16a34a] bg-white/90 shadow-[0_4px_12px_rgba(22,163,74,0.18)] transform -rotate-12 skew-y-6 flex items-center justify-center text-[10px] font-mono font-semibold text-[#14532d]">Vista</div>
+<div class="w-14 h-10 rounded border border-[#9fc1a7] bg-white/40 transform -rotate-6 skew-y-3 absolute translate-x-3 translate-y-1"></div>
+
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px] flex items-center justify-between">
+<span class="">Flip 3D (Vista stack)</span>
+</div>
+<div class="text-[11px] text-[#5e7166]">Iconic cascading 3D isometric stack</div>
+</div>
+<!-- Cascade -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#f0f4f1] border border-[#d2ddd4] mb-2 flex items-center justify-center relative overflow-hidden group-hover:border-[#a8c2af]">
+<div class="w-12 h-9 rounded border border-[#a6bdad] bg-white/60 absolute -translate-x-3 -translate-y-2"></div>
+<div class="w-12 h-9 rounded border border-[#8daaa0] bg-white/80 absolute translate-x-0 translate-y-0"></div>
+<div class="w-12 h-9 rounded border border-[#5d856d] bg-white absolute translate-x-3 translate-y-2 shadow-2xs"></div>
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px]">Cascade</div>
+<div class="text-[11px] text-[#5e7166]">Diagonal cascade offset layout</div>
+</div>
+<!-- Cover Flow -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#f0f4f1] border border-[#d2ddd4] mb-2 flex items-center justify-center relative overflow-hidden group-hover:border-[#a8c2af]">
+<div class="w-10 h-10 border border-[#b2c8b7] bg-white/50 transform rotate-y-45 -skew-y-6"></div>
+<div class="w-12 h-11 border border-[#3f7253] bg-white z-10 rounded shadow-sm flex items-center justify-center">
+<div class="w-8 h-8 rounded-sm bg-[#e8f1eb]"></div>
+</div>
+<div class="w-10 h-10 border border-[#b2c8b7] bg-white/50 transform -rotate-y-45 skew-y-6"></div>
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px]">Cover Flow</div>
+<div class="text-[11px] text-[#5e7166]">Reflective album art flow style</div>
+</div>
+<!-- iTab (black floor, title + app name) -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#1a241e] border border-[#3b4b40] mb-2 flex flex-col items-center justify-center p-2">
+<div class="w-12 h-7 rounded border border-white/60 bg-white/20 mb-1"></div>
+<div class="w-14 h-1 bg-white/60 rounded"></div>
+<div class="w-8 h-1 bg-emerald-400/80 rounded mt-0.5"></div>
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px]">iTab (black floor, title + app)</div>
+<div class="text-[11px] text-[#5e7166]">Solid black stage, dual labels</div>
+</div>
+<!-- iTab (black floor, title only) -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#1a241e] border border-[#3b4b40] mb-2 flex flex-col items-center justify-center p-2">
+<div class="w-12 h-7 rounded border border-white/50 bg-white/20 mb-1"></div>
+<div class="w-12 h-1 bg-white/60 rounded"></div>
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px]">iTab (black floor, title only)</div>
+<div class="text-[11px] text-[#5e7166]">Minimalist stage, single title</div>
+</div>
+<!-- iTab (your background, title + app name) -->
+<div class="card-glass p-3 rounded-[14px] cursor-pointer transition-all flex flex-col group selected" onclick="selectCard(this)">
+<div class="h-20 rounded-lg bg-[#eaf1ec] border border-[#c4d4c8] mb-2 flex flex-col items-center justify-center p-2">
+<div class="w-12 h-7 rounded border border-[#4d7e60] bg-white shadow-2xs mb-1"></div>
+<div class="w-14 h-1 bg-[#15803d]/70 rounded"></div>
+</div>
+<div class="font-semibold text-[#1a2e22] text-[12px]">iTab (your bg, title + app)</div>
+<div class="text-[11px] text-[#5e7166]">Transparent floor with system bg</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== TAB 2: SHORTCUTS ==================== -->
+<div class="tab-content space-y-4 hidden" id="tab-shortcuts">
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Shortcut</div>
+<div class="text-[12px] text-[#63766a]">Primary key combination to open the switcher</div>
+</div>
+<select class="h-9 px-3 rounded-lg bg-white border border-[#cdd8ce] text-[#1a2e22] text-[13px] outline-none focus:border-[#15803d]">
+<option>Alt+Tab</option>
+<option>Win+Tab (Alt+Tab stays native)</option>
+<option>Alt+Tab and Win+Tab</option>
+</select>
+</div>
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Ctrl+Alt+Tab keeps the switcher open</div>
+<div class="text-[12px] text-[#63766a]">Allows navigating windows without continuously holding keys down</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-[22px] bg-[#d3dfd6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#15803d]"></div>
+</label>
+</div>
+<div class="card-glass p-4 rounded-[14px] space-y-2">
+<div class="font-semibold text-[#1a2e22]">Default Keybinds</div>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-3 py-1.5 rounded-lg bg-[#eaf2ec] border border-[#bcd3c3] text-[12px] font-mono text-[#134e35] font-medium">Alt+Tab</span>
+<span class="px-3 py-1.5 rounded-lg bg-white/80 border border-[#d3ded5] text-[12px] font-mono text-[#43594c]">Alt+Shift+Tab</span>
+<span class="px-3 py-1.5 rounded-lg bg-[#eaf2ec] border border-[#bcd3c3] text-[12px] font-mono text-[#134e35] font-medium">Win+Tab</span>
+<span class="px-3 py-1.5 rounded-lg bg-white/80 border border-[#d3ded5] text-[12px] font-mono text-[#43594c]">Ctrl+Alt+Tab</span>
+<span class="px-3 py-1.5 rounded-lg bg-white/80 border border-[#d3ded5] text-[12px] font-mono text-[#43594c]">Win+Ctrl+Tab</span>
+</div>
+</div>
+<div class="card-glass p-4 rounded-[14px] space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Extra shortcuts</div>
+<div class="text-[12px] text-[#63766a]">Configure custom triggers with dedicated animations</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-[#eaf2ec] hover:bg-[#dfebe2] text-[#134e35] border border-[#bdd4c3] text-[12px] font-semibold flex items-center space-x-1 transition-all">
+<span class="">+ Add shortcut</span>
+<span class="text-[#73887c] text-[10px]">(max 20)</span>
+</button>
+</div>
+<div class="flex items-center space-x-3 p-2 rounded-xl bg-white/60 border border-[#d5ded7]">
+<select class="h-8 px-2.5 rounded-lg bg-white border border-[#c9d6cc] text-[#1a2e22] text-[12px] outline-none flex-1">
+<option>Win+Ctrl+Tab stays open</option>
+<option>Ctrl+Alt+Tab stays open</option>
+<option>None</option>
+</select>
+<select class="h-8 px-2.5 rounded-lg bg-white border border-[#c9d6cc] text-[#1a2e22] text-[12px] outline-none flex-1">
+<option>Animation: Same as Alt+Tab or Win+Tab</option>
+<option>Animation: Flip 3D (Vista stack)</option>
+<option>Animation: Cover Flow</option>
+<option>Animation: Grid (Mission Control)</option>
+</select>
+<button class="w-8 h-8 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 border border-red-200 flex items-center justify-center transition-all" title="Remove">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+</button>
+</div>
+</div>
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Monitor</div>
+<div class="text-[12px] text-[#63766a]">Target display screen for the switcher window</div>
+</div>
+<select class="h-9 px-3 rounded-lg bg-white border border-[#cdd8ce] text-[#1a2e22] text-[13px] outline-none">
+<option>Where the mouse cursor is</option>
+<option>Where the active window is</option>
+</select>
+</div>
+</div>
+<!-- ==================== TAB 3: ANIMATION ==================== -->
+<div class="tab-content space-y-4 hidden" id="tab-animation">
+<div class="grid grid-cols-1 gap-3">
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div class="w-1/3">
+<div class="font-semibold text-[#1a2e22] text-[13px]">Open/close animation duration</div>
+<div class="text-[12px] text-[#63766a]">Transition speed in milliseconds</div>
+</div>
+<div class="flex items-center space-x-3 w-1/2">
+<input class="flex-1" max="3000" min="50" oninput="document.getElementById('val-anim-dur').innerText = this.value + ' ms'" type="range" value="420">
+<span class="w-14 text-right mono text-[12px] text-[#134e35] font-semibold" id="val-anim-dur">420 ms</span>
+<button class="text-[#728578] hover:text-[#1a2e22] p-1" title="Reset to default"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></button>
+</div>
+</div>
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div class="w-1/3">
+<div class="font-semibold text-[#1a2e22] text-[13px]">Flip speed</div>
+<div class="text-[12px] text-[#63766a]">Speed of flipping between cards</div>
+</div>
+<div class="flex items-center space-x-3 w-1/2">
+<input class="flex-1" max="400" min="25" oninput="document.getElementById('val-flip-spd').innerText = this.value + ' %'" type="range" value="100">
+<span class="w-14 text-right mono text-[12px] text-[#134e35] font-semibold" id="val-flip-spd">100 %</span>
+<button class="text-[#728578] hover:text-[#1a2e22] p-1" title="Reset to default"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></button>
+</div>
+</div>
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div class="w-1/3">
+<div class="font-semibold text-[#1a2e22] text-[13px]">Tilt angle</div>
+<div class="text-[12px] text-[#63766a]">3D inclination angle in degrees</div>
+</div>
+<div class="flex items-center space-x-3 w-1/2">
+<input class="flex-1" max="70" min="0" oninput="document.getElementById('val-tilt-ang').innerText = this.value + '°'" type="range" value="30">
+<span class="w-14 text-right mono text-[12px] text-[#134e35] font-semibold" id="val-tilt-ang">30°</span>
+<button class="text-[#728578] hover:text-[#1a2e22] p-1" title="Reset to default"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></button>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== TAB 4: WINDOWS ==================== -->
+<div class="tab-content space-y-3.5" id="tab-windows">
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div class="w-1/2">
+<div class="font-semibold text-[#1a2e22]">Maximum number of windows</div>
+<div class="text-[12px] text-[#63766a]">Limit how many app windows appear in switcher</div>
+</div>
+<div class="flex items-center space-x-3 w-1/3">
+<input class="flex-1" max="40" min="2" oninput="document.getElementById('val-max-win').innerText = this.value" type="range" value="20">
+<span class="w-10 text-right mono text-[12px] text-[#134e35] font-semibold" id="val-max-win">20</span>
+</div>
+</div>
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Include minimized windows</div>
+<div class="text-[12px] text-[#63766a]">Show minimized tasks in the rotation stack</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-[22px] bg-[#d3dfd6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#15803d]"></div>
+</label>
+</div>
+<div class="card-glass p-4 rounded-[14px] space-y-3">
+<div>
+<div class="font-semibold text-[#1a2e22]">Excluded apps</div>
+<div class="text-[12px] text-[#63766a]">Processes and window classes ignored by Flip 3D</div>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#eaf2ec] border border-[#bcd3c3] text-[12px] mono text-[#134e35]">
+<span class="">yasb.exe</span>
+<button class="hover:text-red-600 text-[#546e5e]"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button>
+</span>
+<span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#eaf2ec] border border-[#bcd3c3] text-[12px] mono text-[#134e35]">
+<span class="">rainmeter.exe</span>
+<button class="hover:text-red-600 text-[#546e5e]"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button>
+</span>
+</div>
+</div>
+</div>
+<!-- ==================== TAB 5: BACKGROUND ==================== -->
+<div class="tab-content space-y-4 hidden" id="tab-background">
+<div class="card-glass p-4 rounded-[14px] space-y-2">
+<div>
+<div class="font-semibold text-[#1a2e22]">Background</div>
+<div class="text-[12px] text-[#63766a]">Backdrop effect applied behind window switchers</div>
+</div>
+<div class="grid grid-cols-4 gap-1 p-1 rounded-xl bg-[#e8efe9] border border-[#c6d7cb]">
+<button class="py-2 text-[12px] font-semibold rounded-lg bg-white text-[#134e35] shadow-xs">Blurred wallpaper</button>
+<button class="py-2 text-[12px] font-medium rounded-lg text-[#52635a] hover:text-[#1a2e22]">Wallpaper</button>
+<button class="py-2 text-[12px] font-medium rounded-lg text-[#52635a] hover:text-[#1a2e22]">Live desktop</button>
+<button class="py-2 text-[12px] font-medium rounded-lg text-[#52635a] hover:text-[#1a2e22]">Dim only</button>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-[#eaf4ed] border border-[#c3dcce] flex items-start space-x-2.5 text-[#1a4e32]">
+<svg class="w-4 h-4 text-[#15803d] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="16" y2="12"></line><line x1="12" x2="12.01" y1="8" y2="8"></line></svg>
+<span class="text-[12px]">iTab styles with a black floor use their own background.</span>
+</div>
+</div>
+<!-- ==================== TAB 6: DISPLAY ==================== -->
+<div class="tab-content hidden space-y-3.5" id="tab-display">
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Show window title</div>
+<div class="text-[12px] text-[#63766a]">Display application and document name header</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-[22px] bg-[#d3dfd6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#15803d]"></div>
+</label>
+</div>
+<div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Window shadows</div>
+<div class="text-[12px] text-[#63766a]">Render realistic drop shadows under each 3D card</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-[22px] bg-[#d3dfd6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#15803d]"></div>
+</label>
+</div>
+</div>
+<!-- ==================== TAB 7: PERFORMANCE ==================== -->
+<div class="tab-content hidden space-y-4" id="tab-performance">
+<div class="card-glass p-4 rounded-[14px] space-y-2">
+<div>
+<div class="font-semibold text-[#1a2e22]">Live window content</div>
+<div class="text-[12px] text-[#63766a]">Controls DWM thumbnail capture frequency and GPU usage</div>
+</div>
+<div class="grid grid-cols-3 gap-1 p-1 rounded-xl bg-[#e8efe9] border border-[#c6d7cb]">
+<button class="py-2 text-[12px] font-semibold rounded-lg bg-white text-[#134e35] shadow-xs">All windows</button>
+<button class="py-2 text-[12px] font-medium rounded-lg text-[#52635a] hover:text-[#1a2e22]">Only the selected window</button>
+<button class="py-2 text-[12px] font-medium rounded-lg text-[#52635a] hover:text-[#1a2e22]">None (lightest)</button>
+</div>
+</div>
+</div>
+<!-- ==================== TAB 8: SYSTEM & ABOUT ==================== -->
+<div class="tab-content hidden space-y-4" id="tab-system">
+<div class="card-glass p-4 rounded-[14px] flex items-center justify-between">
+<div>
+<div class="font-semibold text-[#1a2e22]">Start with Windows</div>
+<div class="text-[12px] text-[#63766a]">Launch Flip 3D background listener at user logon</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-[22px] bg-[#d3dfd6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#15803d]"></div>
+</label>
+</div>
+<div class="grid grid-cols-3 gap-2.5">
+<button class="h-9 px-3 rounded-lg bg-white hover:bg-[#f0f5f1] border border-[#cdd8ce] text-[#1a2e22] text-[12px] font-medium flex items-center justify-center space-x-1.5 transition-all shadow-xs" id="pauseToggleBtn" onclick="toggleSwitcherState()">
+<svg class="w-3.5 h-3.5 text-[#15803d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="16" width="4" x="6" y="4"></rect><rect height="16" width="4" x="14" y="4"></rect></svg>
+<span class="">Pause / Resume switcher</span>
+</button>
+<button class="h-9 px-3 rounded-lg bg-white hover:bg-[#f0f5f1] border border-[#cdd8ce] text-[#1a2e22] text-[12px] font-medium flex items-center justify-center space-x-1.5 transition-all shadow-xs">
+<svg class="w-3.5 h-3.5 text-[#597163]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path></svg>
+<span class="">Open config folder</span>
+</button>
+<button class="h-9 px-3 rounded-lg bg-white hover:bg-[#f0f5f1] border border-[#cdd8ce] text-[#1a2e22] text-[12px] font-medium flex items-center justify-center space-x-1.5 transition-all shadow-xs">
+<svg class="w-3.5 h-3.5 text-[#597163]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+<span class="">Open log file</span>
+</button>
+</div>
+<div class="card-glass p-4 rounded-[14px] space-y-3">
+<div class="flex items-center space-x-3">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAnVOEI3AtJ26HEyYo6mkSwaMwgA7VhO53AdEACoRHDC2AhzgsWQPhRg-0Lj35cFP4zT0x17AtmIsTtJMGPhsTImvsW14m4uS1zLE9BQl-1Nus3H0WdJ2ZNjB4hai26vclXPahIch_hHtq797-T5JQd6HTP1hsrNil0IeEysilau5iGUgPIuAC_ju0pQ-cFFTAZx6zegF5OWSd9ga3gMbxqIzcSWNnmE7mOnlTUyLKNy2yOoj7AjG9enxcgb8lP3kA" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-[#bdd4c3] shadow-xs">
+<div>
+<div class="font-bold text-[#1a2e22] text-[14px]">Flip 3D</div>
+<div class="text-[12px] text-[#55695e]">Standalone Rust port of the Windhawk mod Alt+Tab Flip 3D (Vista Style)</div>
+</div>
+</div>
+<div class="text-[12px] text-[#63766a]">
+            Original mod by <span class="text-[#134e35] font-semibold">caliberda</span> · MIT license
+          </div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Footer Bar (Height: 56px, Bone-white glass) -->
+<div class="h-14 flex-shrink-0 px-6 flex items-center justify-between border-t border-black/[0.06] bg-white/60">
+<!-- Left: Reset to defaults (Ghost button) -->
+<button class="text-[#52635a] hover:text-[#1a2e22] text-[13px] font-medium transition-colors flex items-center space-x-2 py-1.5 px-2.5 rounded-lg hover:bg-black/[0.04] active:scale-95">
+<svg class="w-3.5 h-3.5 text-[#597163]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+<span class="">Reset to defaults</span>
+</button>
+<!-- Right: Live indicator + Apply Button -->
+<div class="flex items-center space-x-4">
+<span class="text-[12px] text-[#6b7d72] italic font-normal">Changes apply live</span>
+<button class="h-9 px-6 rounded-xl bg-[#15803d] hover:bg-[#166534] text-white font-semibold text-[13px] shadow-sm hover:shadow-md transition-all active:scale-95">
+        Apply
+      </button>
+</div>
+</div>
+</div>
+<script>
+  // Tab switching logic
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.add('hidden');
+    });
+    const activeContent = document.getElementById('tab-' + tabId);
+    if (activeContent) {
+      activeContent.classList.remove('hidden');
+    }
+  }
+
+  // Card selection in Style tab
+  function selectCard(cardElement) {
+    document.querySelectorAll('#tab-style .card-glass').forEach(el => {
+      el.classList.remove('selected');
+      const glow = el.querySelector('.bg-emerald-500, .bg-\\[\\#10b981\\]');
+      if (glow && glow.classList.contains('w-2.5')) glow.remove();
+    });
+    cardElement.classList.add('selected');
+  }
+
+  // Dropdown toggle
+  function toggleDropdown(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden');
+  }
+
+  function selectWinTab(val) {
+    document.getElementById('selectedWinTab').innerText = val;
+    toggleDropdown('winTabDropdown');
+  }
+
+  // Toggle switcher active/paused state
+  let isPaused = false;
+  function toggleSwitcherState() {
+    isPaused = !isPaused;
+    const dot = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    const pill = document.getElementById('statusPill');
+    if (isPaused) {
+      dot.className = "w-2 h-2 rounded-full bg-slate-400";
+      dot.style.boxShadow = "none";
+      text.innerText = "Paused";
+      text.className = "text-[12px] font-medium text-slate-600";
+      pill.className = "flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 shadow-xs";
+    } else {
+      dot.className = "w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]";
+      dot.style.boxShadow = "0 0 8px #10b981";
+      text.innerText = "Active";
+      text.className = "text-[12px] font-semibold text-[#134e35]";
+      pill.className = "flex items-center space-x-2 px-3 py-1 rounded-full bg-[#eaf4ed] border border-[#c3dcce] shadow-xs";
+    }
+  }
+</script>
+
+
+</body></html>

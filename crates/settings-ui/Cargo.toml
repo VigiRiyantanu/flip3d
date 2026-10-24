@@ -1,0 +1,32 @@
+[package]
+name = "settings-ui"
+version = "1.7.1"
+edition = "2021"
+authors = ["caliberda (original mod)", "Antigravity (Rust port)"]
+license = "MIT"
+description = "Glass-style WebView2 Settings Panel for Flip 3D"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "settings-ui"
+path = "src/main.rs"
+
+[dependencies]
+settings-core = { path = "../settings-core" }
+wry = "0.48"
+tao = "0.31"
+window-vibrancy = "0.5"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+rfd = "0.15"
+windows = { version = "0.62.2", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Threading",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Registry",
+    "Win32_Graphics_Dwm",
+] }

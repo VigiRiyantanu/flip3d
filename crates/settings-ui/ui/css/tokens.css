@@ -1,0 +1,52 @@
+/* Flip 3D Settings Design Tokens (code.html ivory/green palette + DESIGN.md typography & radii) */
+
+:root {
+  /* Colors */
+  --accent: #15803d;
+  --accent-hover: #166534;
+  --accent-glow: rgba(22, 163, 74, 0.22);
+  --accent-light: #eaf2ec;
+  --accent-border: #bdd4c3;
+
+  /* Translucent Ivory Glass tuned for real OS Blur (alpha ~0.65) */
+  --window-bg: rgba(250, 249, 245, 0.65);
+  --titlebar-bg: rgba(255, 255, 255, 0.40);
+  --sidebar-bg: rgba(245, 246, 241, 0.55);
+  --content-bg: transparent;
+  --footer-bg: rgba(255, 255, 255, 0.45);
+
+  --card-bg: rgba(255, 255, 255, 0.68);
+  --card-border: rgba(205, 216, 206, 0.70);
+  --card-hover: rgba(255, 255, 255, 0.88);
+  --card-selected-bg: rgba(255, 255, 255, 0.95);
+  --card-selected-border: #16a34a;
+
+  --forest-text: #1a2e22;
+  --forest-dark: #134e35;
+  --sage-text: #52635a;
+  --muted-text: #76887e;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+
+  /* Radii scale from DESIGN.md */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 14px;
+  --radius-window: 16px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Mono', 'Consolas', monospace;
+}
+
+/* Fallback when OS blur is unavailable or turned off in Windows settings */
+html.no-blur {
+  --window-bg: #f6f5ef;
+  --titlebar-bg: #eae9e2;
+  --sidebar-bg: #f0eee7;
+  --content-bg: #fbfaf6;
+  --footer-bg: #eceae3;
+  --card-bg: #ffffff;
+  --card-hover: #f3f7f4;
+}

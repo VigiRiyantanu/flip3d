@@ -1,0 +1,157 @@
+/* Flip 3D Base Styles & Resets */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../assets/fonts/inter.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrainsmono.woff2') format('woff2');
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent !important;
+  font-family: var(--font-sans);
+  color: var(--forest-text);
+  font-size: 13px;
+  line-height: 1.45;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 160, 146, 0.35);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 128, 108, 0.55);
+}
+
+/* Range Slider Styling */
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #d4ded6;
+  border-radius: 2px;
+}
+input[type=range]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  box-shadow: 0 2px 6px rgba(21, 128, 61, 0.35);
+  border: 2px solid #ffffff;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(21, 128, 61, 0.45);
+}
+
+/* Toggle Switches */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.slider {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  background-color: #d3dfd6;
+  border-radius: var(--radius-full);
+  transition: .22s ease;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: var(--radius-full);
+  transition: .22s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.switch input:checked + .slider {
+  background-color: var(--accent);
+}
+.switch input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+/* Button & Select Resets */
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+select {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input[type=text] {
+  font-family: inherit;
+  outline: none;
+}
+input[type=text]:focus {
+  border-color: var(--accent);
+}
