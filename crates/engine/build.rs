@@ -9,6 +9,8 @@ fn main() {
     println!("cargo:rerun-if-changed=app.manifest");
     println!("cargo:rerun-if-changed=app.rc");
     println!("cargo:rerun-if-changed=app.ico");
+    println!("cargo:rerun-if-changed=shaders/fxaa_vs.hlsl");
+    println!("cargo:rerun-if-changed=shaders/fxaa_ps.hlsl");
 
     let target_os = std::env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
     let target_env = std::env::var("CARGO_CFG_TARGET_ENV").unwrap_or_default();

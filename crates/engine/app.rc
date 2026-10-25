@@ -17,11 +17,11 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", "Vigi Riyantanu & jundaee\0"
+            VALUE "CompanyName", "Vigi Riyantanu, jundaee & Ahmad Baihagi\0"
             VALUE "FileDescription", "Alt+Tab Flip 3D (Vista Style)\0"
             VALUE "FileVersion", "1.7.1.0\0"
             VALUE "InternalName", "flip3d.exe\0"
-            VALUE "LegalCopyright", "Copyright (c) 2024-2026 caliberda, (c) 2026 Vigi Riyantanu & jundaee. MIT License\0"
+            VALUE "LegalCopyright", "Copyright (c) 2024-2026 caliberda, (c) 2026 Vigi Riyantanu, jundaee, Ahmad Baihagi. MIT License\0"
             VALUE "OriginalFilename", "flip3d.exe\0"
             VALUE "ProductName", "Flip 3D\0"
             VALUE "ProductVersion", "1.7.1.0\0"

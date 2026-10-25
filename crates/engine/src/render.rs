@@ -9,11 +9,12 @@ use windows::Win32::Graphics::Direct2D::Common::{
 use windows::Win32::Graphics::Direct2D::{
     CLSID_D2D13DTransform, CLSID_D2D1ColorMatrix, CLSID_D2D1Shadow, ID2D1DeviceContext,
     ID2D1Effect, ID2D1Factory1, ID2D1LinearGradientBrush, ID2D1RadialGradientBrush,
-    ID2D1SolidColorBrush, D2D1_COLORMATRIX_PROP_COLOR_MATRIX, D2D1_INTERPOLATION_MODE_LINEAR,
-    D2D1_LAYER_PARAMETERS1, D2D1_PROPERTY_TYPE, D2D1_PROPERTY_TYPE_FLOAT,
+    ID2D1SolidColorBrush, ID2D1StrokeStyle, D2D1_CAP_STYLE_ROUND,
+    D2D1_COLORMATRIX_PROP_COLOR_MATRIX, D2D1_INTERPOLATION_MODE_LINEAR, D2D1_LAYER_PARAMETERS1,
+    D2D1_LINE_JOIN_ROUND, D2D1_PROPERTY_TYPE, D2D1_PROPERTY_TYPE_FLOAT,
     D2D1_PROPERTY_TYPE_MATRIX_4X4, D2D1_PROPERTY_TYPE_MATRIX_5X4, D2D1_PROPERTY_TYPE_UINT32,
     D2D1_PROPERTY_TYPE_VECTOR4, D2D1_SHADOW_PROP_BLUR_STANDARD_DEVIATION, D2D1_SHADOW_PROP_COLOR,
-    D2D1_SHADOW_PROP_OPTIMIZATION,
+    D2D1_SHADOW_PROP_OPTIMIZATION, D2D1_STROKE_STYLE_PROPERTIES1,
 };
 use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
 use windows_numerics::Vector2;
@@ -273,7 +274,19 @@ pub fn draw_card(
                             b: 1.0,
                             a: 0.9 * highlight,
                         });
-                        ctx.DrawGeometry(&outline, brush, (screen_h / 360.0).max(2.0), None);
+                        let stroke_props = D2D1_STROKE_STYLE_PROPERTIES1 {
+                            startCap: D2D1_CAP_STYLE_ROUND,
+                            endCap: D2D1_CAP_STYLE_ROUND,
+                            dashCap: D2D1_CAP_STYLE_ROUND,
+                            lineJoin: D2D1_LINE_JOIN_ROUND,
+                            miterLimit: 10.0,
+                            ..Default::default()
+                        };
+                        let stroke_style = d2d_factory
+                            .CreateStrokeStyle(&stroke_props, None)
+                            .ok()
+                            .and_then(|s| s.cast::<ID2D1StrokeStyle>().ok());
+                        ctx.DrawGeometry(&outline, brush, (screen_h / 360.0).max(2.0), stroke_style.as_ref());
                     }
                 }
             }

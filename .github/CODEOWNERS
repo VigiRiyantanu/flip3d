@@ -2,7 +2,7 @@
 # See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default global ownership across the entire repository
-* @VigiRiyantanu @jundaee
+* @VigiRiyantanu @jundaee @AhmadBaihagi
 
 # ----------------------------------------------------------------------
 # 1. Core Engine & Low-Level Graphics
@@ -21,7 +21,14 @@
 /crates/engine/tests/ @VigiRiyantanu
 
 # ----------------------------------------------------------------------
-# 2. UI / UX, WebView2 Runtime & Packaging
+# 2. Shaders & Post-Processing Anti-Aliasing
+# Lead: @AhmadBaihagi (Graphics Optimization & Shaders Engineer)
+# ----------------------------------------------------------------------
+/crates/engine/src/fxaa.rs @AhmadBaihagi
+/crates/engine/shaders/ @AhmadBaihagi
+
+# ----------------------------------------------------------------------
+# 3. UI / UX, WebView2 Runtime & Packaging
 # Lead: @jundaee (UI/UX Architect & Desktop Systems Engineer)
 # ----------------------------------------------------------------------
 /crates/settings-ui/ @jundaee
@@ -35,11 +42,11 @@
 /crates/engine/src/app/elevation.rs @jundaee
 /crates/engine/src/app/settings_ui.rs @jundaee
 /installer/ @jundaee
-/build-release.ps1 @jundaee @VigiRiyantanu
+/build-release.ps1 @jundaee @VigiRiyantanu @AhmadBaihagi
 
 # ----------------------------------------------------------------------
-# 3. Shared Core Configuration & Protocols (Joint Ownership)
+# 4. Shared Core Configuration & Protocols (Joint Ownership)
 # ----------------------------------------------------------------------
-/crates/settings-core/ @VigiRiyantanu @jundaee
-/architecture.md @VigiRiyantanu @jundaee
-/README.md @VigiRiyantanu @jundaee
+/crates/settings-core/ @VigiRiyantanu @jundaee @AhmadBaihagi
+/architecture.md @VigiRiyantanu @jundaee @AhmadBaihagi
+/README.md @VigiRiyantanu @jundaee @AhmadBaihagi

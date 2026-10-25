@@ -2533,9 +2533,18 @@ impl Switcher {
             None => return,
         };
 
+        let use_fxaa = self.settings.anti_aliasing != settings_core::AntiAliasingMode::Off
+            && gfx.fxaa.as_ref().is_some_and(|f| f.offscreen_bitmap.is_some());
+
+        let target_bitmap = if use_fxaa {
+            gfx.fxaa.as_ref().unwrap().offscreen_bitmap.as_ref().unwrap()
+        } else {
+            gfx.target_bitmap.as_ref().unwrap()
+        };
+
         // SAFETY: Render full frame.
         let present_res = unsafe {
-            gfx.ctx.SetTarget(gfx.target_bitmap.as_ref().unwrap());
+            gfx.ctx.SetTarget(target_bitmap);
             gfx.ctx.BeginDraw();
             gfx.ctx.Clear(Some(&D2D1_COLOR_F {
                 r: 0.0,
@@ -2640,6 +2649,13 @@ impl Switcher {
             gfx.ctx.SetTarget(None);
 
             if hr.is_ok() {
+                if use_fxaa {
+                    if let Some(fxaa) = &gfx.fxaa {
+                        if let Err(e) = fxaa.render(&gfx.d3d_context, self.settings.anti_aliasing) {
+                            log::warn!("FXAA execution error: {:?}", e);
+                        }
+                    }
+                }
                 gfx.swap_chain
                     .as_ref()
                     .unwrap()

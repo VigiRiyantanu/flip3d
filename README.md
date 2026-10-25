@@ -209,19 +209,21 @@ Output directory: `dist/`
 
 ## 👥 Core Team & Engineering Ownership
 
-Flip 3D is developed and maintained by a dedicated engineering duo, structured with distinct technical domains and module ownership:
+Flip 3D is developed and maintained by a dedicated engineering team, structured with distinct technical domains and module ownership:
 
 | Contributor | Engineering Role | Area of Ownership & Jobdesk |
 | :--- | :--- | :--- |
 | **Vigi Riyantanu**<br>[@VigiRiyantanu](https://github.com/VigiRiyantanu) | **Lead Systems Architect & Core Graphics Engineer** | • **DirectX 11 Graphics Pipeline**: Direct3D 11 device/swapchain lifecycle, GPU texture staging, and Direct2D/DirectWrite composite overlays.<br>• **3D Projection & Geometry**: Spatial camera matrices, vanishing point transformations, and responsive spring easing math across all 24 layout modes.<br>• **Win32 Kernel & Hooks**: Low-level `WH_KEYBOARD_LL` and `WH_MOUSE_LL` hooks, non-intrusive input interception, and state machine transitions.<br>• **Window Capture & DWM**: Thumbnail acquisition via Windows Graphics Capture & DWM, virtual screen coordinate mapping, and multi-monitor DPI normalization.<br>• **Engine Security & Hardening**: Session-scoped named mutexes, path remapping, and static CRT binary compilation. |
 | **jundaee**<br>[@jundaee](https://github.com/jundaee) | **UI/UX Architect & Desktop Systems Engineer** | • **WebView2 Settings Host Runtime**: Tao native windowing host, OS Acrylic and Mica vibrancy integration (`window-vibrancy`), and detached subprocess management (`flip3d.exe --settings`).<br>• **Sandboxing & Custom Protocol**: Offline `app://` custom protocol scheme with embedded asset streaming and strict zero-network sandbox.<br>• **Frontend Glass UI & State Store**: Translucent Ivory & Emerald design system, responsive UI components, custom range sliders, shortcut recorder, and bidirectional IPC bridge.<br>• **System Tray & Lifecycle**: Native tray icon handling, single-instance duplicate alerts, UAC elevation restart routines, and Windows Task Scheduler / Registry autostart.<br>• **Packaging Automation**: Inno Setup 6 installer compilation, WebView2 bootstrapper provisioning, RestartManager hooks, and `build-release.ps1` portable zip packaging. |
+| **Ahmad Baihagi**<br>[@AhmadBaihagi](https://github.com/AhmadBaihagi) | **Graphics Optimization & Shaders Engineer** | • **Direct3D 11 Post-Processing**: Full-screen triangle pipeline, FXAA 3.11 shader implementation, and dynamic subpixel edge reconstruction.<br>• **Edge Smoothing & Antialiasing**: Directional gradient filtering, corner join anti-aliasing on quad geometry, and luminance threshold calibration.<br>• **GPU Profiling & Performance**: Zero-overhead passthrough switching, frame pacing optimization, and offscreen render target lifecycle management. |
 
 ### Module Ownership (`.github/CODEOWNERS`)
 
 Code reviews and repository pull requests are automatically mapped based on functional jobdesks:
 - **Core Engine & Low-Level Graphics**: [`@VigiRiyantanu`](https://github.com/VigiRiyantanu) (`crates/engine/src/{gfx,geometry,layout,render,capture,hooks,switcher}`)
+- **Shaders & Post-Processing Anti-Aliasing**: [`@AhmadBaihagi`](https://github.com/AhmadBaihagi) (`crates/engine/src/fxaa.rs`, `crates/engine/shaders/`)
 - **Settings UI, Tray, Autostart & Packaging**: [`@jundaee`](https://github.com/jundaee) (`crates/settings-ui/`, `crates/engine/src/app/`, `installer/`, `build-release.ps1`)
-- **Shared Core Configuration & Protocols**: [`@VigiRiyantanu`](https://github.com/VigiRiyantanu) & [`@jundaee`](https://github.com/jundaee) (`crates/settings-core/`)
+- **Shared Core Configuration & Protocols**: [`@VigiRiyantanu`](https://github.com/VigiRiyantanu), [`@jundaee`](https://github.com/jundaee) & [`@AhmadBaihagi`](https://github.com/AhmadBaihagi) (`crates/settings-core/`)
 
 ### Acknowledgements
 

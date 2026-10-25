@@ -11,6 +11,7 @@ To maintain architectural integrity and low latency across the codebase, Flip 3D
 | Domain / Subsystem | Lead Engineer | Scope & Jobdesk |
 | :--- | :--- | :--- |
 | **DirectX 11 Graphics & Shaders** | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Direct3D 11 device, swapchain management, Direct2D/DirectWrite overlays, GPU texture staging. |
+| **Direct3D 11 Post-Processing & FXAA** | **Ahmad Baihagi** ([@AhmadBaihagi](https://github.com/AhmadBaihagi)) | Full-screen triangle pipeline, FXAA 3.11 shader implementation, edge detection thresholds, GPU profiling. |
 | **3D Geometry & Layout Engine** | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | 3D projective mathematics, camera perspective transforms, spring interpolation curves across 24 switcher styles. |
 | **Win32 Input Hooks & State Machine** | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Low-level `WH_KEYBOARD_LL`/`WH_MOUSE_LL` hooks, non-intrusive shortcut interception, dummy key events. |
 | **Window Capture Pipeline** | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Windows Graphics Capture & DWM thumbnail interop, virtual desktop coordinate normalization. |

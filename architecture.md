@@ -193,6 +193,7 @@ powershell -ExecutionPolicy Bypass -File .\build-release.ps1 [-Target <triple>] 
 | Subsystem / Module | Lead Engineer | Area of Ownership & Jobdesk |
 | :--- | :--- | :--- |
 | **DirectX 11 Graphics & Shaders** (`crates/engine/src/gfx.rs`, `render.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Direct3D 11 device/swapchain creation, Direct2D/DirectWrite overlays, GPU texture staging. |
+| **Direct3D 11 FXAA Pipeline** (`crates/engine/src/fxaa.rs`, `shaders/`) | **Ahmad Baihagi** ([@AhmadBaihagi](https://github.com/AhmadBaihagi)) | Full-screen triangle pipeline, FXAA 3.11 shader implementation, edge detection thresholds, GPU profiling. |
 | **3D Geometry & Layout Engine** (`crates/engine/src/geometry.rs`, `layout.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | 3D projective math, camera perspective transforms, spring interpolation across 24 switcher styles. |
 | **Win32 Input Hooks & State Machine** (`crates/engine/src/hooks.rs`, `switcher.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Low-level `WH_KEYBOARD_LL`/`WH_MOUSE_LL` hooks, non-intrusive shortcut interception, dummy key events. |
 | **Window Capture Pipeline** (`crates/engine/src/capture.rs`, `windows_list.rs`) | **Vigi Riyantanu** ([@VigiRiyantanu](https://github.com/VigiRiyantanu)) | Windows Graphics Capture & DWM thumbnail interop, virtual desktop coordinate normalization. |

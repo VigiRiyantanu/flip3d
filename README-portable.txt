@@ -3,7 +3,7 @@
 ==============================================================================
 
 Original Windhawk mod by caliberda (MIT License)
-Ported to standalone portable Rust by Vigi Riyantanu & jundaee
+Ported to standalone portable Rust by Vigi Riyantanu, jundaee & Ahmad Baihagi
 
 ------------------------------------------------------------------------------
 QUICK START

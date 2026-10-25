@@ -61,6 +61,7 @@ mod tests {
             manager_hidden_windows: false,
             live_content: "invalid".to_string(),
             frame_rate: "screen".to_string(),
+            anti_aliasing: "invalid_aa".to_string(),
             middle_click_close: false,
             close_button: false,
             hide_bars: false,
@@ -88,6 +89,7 @@ mod tests {
         assert_eq!(cfg.title_position, "bottom");
         assert_eq!(cfg.virtual_desktops, "windows");
         assert_eq!(cfg.live_content, "all");
+        assert_eq!(cfg.anti_aliasing, "fxaa");
         assert_eq!(cfg.excluded_apps, vec!["app.exe"]);
     }
 
@@ -103,6 +105,7 @@ mod tests {
         assert!((settings.stack_spacing - 1.0).abs() < 1e-4);
         assert_eq!(settings.max_windows, 20);
         assert_eq!(settings.background, BackgroundMode::BlurredWallpaper);
+        assert_eq!(settings.anti_aliasing, AntiAliasingMode::Fxaa);
     }
 
     #[test]

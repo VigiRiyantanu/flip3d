@@ -221,6 +221,7 @@ pub struct Config {
     pub manager_hidden_windows: bool,
     pub live_content: String,
     pub frame_rate: String,
+    pub anti_aliasing: String,
     pub middle_click_close: bool,
     pub close_button: bool,
     pub hide_bars: bool,
@@ -257,6 +258,7 @@ impl Default for Config {
             manager_hidden_windows: false,
             live_content: "all".to_string(),
             frame_rate: "screen".to_string(),
+            anti_aliasing: "fxaa".to_string(),
             middle_click_close: true,
             close_button: true,
             hide_bars: true,
@@ -349,6 +351,12 @@ impl Config {
             _ => self.live_content = "all".to_string(),
         }
 
+        // Anti-aliasing
+        match self.anti_aliasing.to_ascii_lowercase().as_str() {
+            "off" | "none" | "fxaa" | "fxaa_high" => {}
+            _ => self.anti_aliasing = "fxaa".to_string(),
+        }
+
         // Excluded apps sanitization
         let mut clean_apps = Vec::new();
         for item in &self.excluded_apps {
@@ -366,6 +374,32 @@ impl Config {
 }
 
 pub type RawConfigFile = Config;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum AntiAliasingMode {
+    Off,
+    Fxaa,
+    FxaaHigh,
+}
+
+impl AntiAliasingMode {
+    pub fn from_str_name(val: &str) -> Self {
+        match val.to_ascii_lowercase().as_str() {
+            "off" | "none" => Self::Off,
+            "fxaa_high" | "fxaahigh" | "high" => Self::FxaaHigh,
+            _ => Self::Fxaa,
+        }
+    }
+
+    pub fn to_str_name(self) -> &'static str {
+        match self {
+            Self::Off => "off",
+            Self::Fxaa => "fxaa",
+            Self::FxaaHigh => "fxaa_high",
+        }
+    }
+}
 
 #[derive(Debug, Clone)]
 pub struct Settings {
@@ -395,6 +429,7 @@ pub struct Settings {
     pub live_content: LiveContent,
     pub max_fps: i32,
     pub fps_above_screen: i32,
+    pub anti_aliasing: AntiAliasingMode,
     pub middle_click_close: bool,
     pub close_button: bool,
     pub hide_bars: bool,
@@ -512,6 +547,7 @@ impl Settings {
         let middle_click_close = config.middle_click_close;
         let close_button = config.close_button;
         let hide_bars = config.hide_bars;
+        let anti_aliasing = AntiAliasingMode::from_str_name(&config.anti_aliasing);
 
         Self {
             style: alt_tab_style,
@@ -540,6 +576,7 @@ impl Settings {
             live_content,
             max_fps,
             fps_above_screen,
+            anti_aliasing,
             middle_click_close,
             close_button,
             hide_bars,

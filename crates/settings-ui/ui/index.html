@@ -463,6 +463,18 @@
               <option value="240">240 FPS</option>
             </select>
           </div>
+
+          <div class="card-glass p-3.5 rounded-[14px] flex items-center justify-between">
+            <div>
+              <div class="font-semibold text-[#1a2e22]">Anti-Aliasing (AA)</div>
+              <div class="text-[12px] text-[#63766a]">Smoothes 3D-flipped window preview edges and contours. Higher = smoother edges, more GPU usage.</div>
+            </div>
+            <select data-setting="anti_aliasing" data-type="select" class="h-9 px-3 rounded-lg bg-white border border-[#cdd8ce] text-[#1a2e22] text-[13px] outline-none">
+              <option value="off">Off (Sharp edges, lowest GPU usage)</option>
+              <option value="fxaa">FXAA (Recommended, fast & smooth)</option>
+              <option value="fxaa_high">FXAA High (Smoothest edges, high quality)</option>
+            </select>
+          </div>
         </div>
 
         <!-- ==================== TAB 8: SYSTEM & ABOUT ==================== -->

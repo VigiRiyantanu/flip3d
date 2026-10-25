@@ -4,6 +4,7 @@
 pub mod app;
 pub mod background;
 pub mod capture;
+pub mod fxaa;
 pub mod geometry;
 pub mod gfx;
 pub mod hooks;

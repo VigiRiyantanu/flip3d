@@ -100,6 +100,7 @@ pub struct GraphicsDeviceContext {
     pub checked_monitor: HMONITOR,
     pub device_removed_event: Option<HANDLE>,
     pub device_removed_cookie: u32,
+    pub fxaa: Option<crate::fxaa::FxaaPipeline>,
 }
 
 impl GraphicsDeviceContext {
@@ -262,6 +263,18 @@ impl GraphicsDeviceContext {
         let wic_factory: IWICImagingFactory =
             unsafe { CoCreateInstance(&CLSID_WICImagingFactory, None, CLSCTX_INPROC_SERVER)? };
 
+        // Post-process FXAA Anti-Aliasing pipeline
+        let fxaa = match crate::fxaa::FxaaPipeline::new(&d3d_device) {
+            Ok(pipe) => {
+                log::info!("Hardware-accelerated FXAA 3.11 pipeline initialized successfully.");
+                Some(pipe)
+            }
+            Err(e) => {
+                log::warn!("FXAA pipeline initialization failed: {:?}, falling back to direct presentation.", e);
+                None
+            }
+        };
+
         Ok(Self {
             d3d_device,
             d3d_context,
@@ -284,6 +297,7 @@ impl GraphicsDeviceContext {
             checked_monitor: monitor,
             device_removed_event,
             device_removed_cookie,
+            fxaa,
         })
     }
 
@@ -349,10 +363,16 @@ impl GraphicsDeviceContext {
             self.dcomp_visual.SetContent(&swap_chain)?;
             self.dcomp_device.Commit()?;
 
-            self.swap_chain = Some(swap_chain);
+            self.swap_chain = Some(swap_chain.clone());
             self.target_bitmap = Some(target_bitmap);
             self.swap_width = width;
             self.swap_height = height;
+
+            if let Some(fxaa) = &mut self.fxaa {
+                if let Err(e) = fxaa.ensure_resources(&self.d3d_device, &self.ctx, &swap_chain, width, height) {
+                    log::warn!("FXAA resource allocation failed: {:?}, will fallback to standard render target.", e);
+                }
+            }
         }
 
         Ok(true)
@@ -362,6 +382,9 @@ impl GraphicsDeviceContext {
         // SAFETY: Detach target bitmap before dropping swap chain.
         unsafe {
             self.ctx.SetTarget(None);
+        }
+        if let Some(fxaa) = &mut self.fxaa {
+            fxaa.release_resources();
         }
         self.target_bitmap = None;
         self.swap_chain = None;

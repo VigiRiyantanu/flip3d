@@ -5,6 +5,7 @@ edition = "2021"
 authors = [
     "jundaee <jundaee@users.noreply.github.com>",
     "Vigi Riyantanu <VigiRiyantanu@users.noreply.github.com>",
+    "Ahmad Baihagi <AhmadBaihagi@users.noreply.github.com>",
 ]
 license = "MIT"
 description = "Glass-style WebView2 Settings Panel for Flip 3D"
